@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+
+            <div class="card weather-card shadow-lg">
+
+                <div class="card-body">
+
+                    <h1 class="text-center mb-4">
+                        Weather App
+                    </h1>
+
+                    <form method="POST">
+
+                        <div class="input-group mb-3">
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="city"
+                                placeholder="Enter city name"
+                                required
+                            >
+
+                            <button
+                                class="btn btn-primary"
+                                type="submit">
+                                Search
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                    {% if error %}
+                        <div class="alert alert-danger">
+                            {{ error }}
+                        </div>
+                    {% endif %}
+
+                    {% if weather %}
+
+<div class="text-center mt-4">
+
+    <h2>
+        {{ weather.city }},
+        {{ weather.country }}
+    </h2>
+
+    <img
+        class="weather-icon"
+        src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png"
+        alt="Weather Icon">
+
+    <div class="temp">
+        {{ weather.temperature }}°C
+    </div>
+
+    <p class="text-muted">
+        Min: {{ weather.temp_min }}°C |
+        Max: {{ weather.temp_max }}°C
+    </p>
+
+    <h5 class="text-muted">
+        {{ weather.description }}
+    </h5>
+
+    <hr>
+
+    <div class="weather-info">
+
+        <p>
+            💧 Humidity:
+            {{ weather.humidity }}%
+        </p>
+
+        <p>
+            🌬 Wind Speed:
+            {{ weather.wind_speed }} m/s
+        </p>
+
+        <p>
+            🌡 Feels Like:
+            {{ weather.feels_like }}°C
+        </p>
+
+        <p>
+            🧭 Pressure:
+            {{ weather.pressure }} hPa
+        </p>
+
+        <p>
+            👀 Visibility:
+            {{ weather.visibility }} km
+        </p>
+
+        <p class="text-secondary">
+            Updated: {{ weather.updated }}
+        </p>
+
+    </div>
+
+</div>
+
+{% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
